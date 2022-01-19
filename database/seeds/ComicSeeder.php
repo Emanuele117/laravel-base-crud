@@ -36,6 +36,6 @@ class ComicSeeder extends Seeder
             $_comic->title = $comic['title'];
             $_comic->description = $comic['description'];
             $_comic->save();
-        }
+        };
     }
 }
