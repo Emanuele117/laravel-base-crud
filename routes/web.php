@@ -25,15 +25,15 @@ Route::get('admin/posts', 'Admin\PostController@index')->name('admin.posts.index
 
 Route::get('admin/posts/create', 'Admin\PostController@create')->name('admin.posts.create');
 
-Route::post('posts', 'Admin\PostController@store')->name('admin.posts.store');
+Route::post('admin/posts', 'Admin\PostController@store')->name('admin.posts.store');
 
-Route::get('posts/{post}', 'Admin\PostController@show')->name('admin.posts.show');
+Route::get('admin/posts/{post}', 'Admin\PostController@show')->name('admin.posts.show');
 
-Route::get('posts/{post}/edit', 'Admin\PostController@edit')->name('admin.posts.edit');
+Route::get('admin/posts/{post}/edit', 'Admin\PostController@edit')->name('admin.posts.edit');
 
-Route::put('posts/{post}', 'Admin\PostController@update')->name('admin.posts.update');
+Route::put('admin/posts/{post}', 'Admin\PostController@update')->name('admin.posts.update');
 
-Route::delete('posts/{post}', 'Admin\PostController@destroy')->name('admin.posts.destroy');
+Route::delete('admin/posts/{post}', 'Admin\PostController@destroy')->name('admin.posts.destroy');
 
 
 

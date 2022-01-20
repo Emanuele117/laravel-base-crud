@@ -8,6 +8,12 @@
     <a href="{{ route('admin.posts.create')}}" role="button">create</a>
 </div>
 
+@if (session('message'))
+<div class="alert alert-success">
+    {{session('message')}}
+</div>
+@endif 
+
 <div class="container">
     <table class="table">
         <thead>
@@ -26,7 +32,17 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->update_at }}</td>
-                <td>view - edit - delete</td>
+                <td>
+                    <a href="{{route('admin.posts.show', $post->id)}}">View </a> 
+                    
+                    <a href="{{route('admin.posts.edit', $post->id)}}">Edit </a>
+
+                    <form action="{{route('admin.posts.destroy', $post->id)}}" method="post">
+                        @csrf 
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
             

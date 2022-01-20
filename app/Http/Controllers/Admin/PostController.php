@@ -36,10 +36,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post();
+
+        // validate your data
+        $validated_data = $request->validate([
+            'title' => 'required | unique:posts',
+            'body' => 'nullable'
+        ]);
+        
+        Post::create($validated_data);
+
+
+        /* $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->save();
+        $post->save(); */
+
 
         return redirect()->route('admin.posts.index');
     }
@@ -53,6 +64,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -63,7 +75,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -75,7 +87,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validated_data = $request->validate([
+            'title' => 'required|unique:posts',
+            'body' => 'nullable'
+        ]);
+
+        $post->update($validated_data);
+        return redirect()->route('admin.posts.index')->with('message', 'Complimenti hai modificato il post correttamente!');
     }
 
     /**
@@ -86,6 +104,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index')->with('message', 'Hai rimosso il post correttamente');
     }
 }
